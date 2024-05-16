@@ -29,7 +29,10 @@ The data is obtained from Kaggle: [Flipkart Product reviews with sentiment Datas
 
 ## Project Requirements
 To run this project, you need to install the following dependencies:  
-### requirements.txt 
+
+
+```python
+# requirements.txt 
 streamlit
 nltk
 pandas
