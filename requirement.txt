@@ -1,7 +1,7 @@
-nltk==3.8.1   
-pandas==1.4.4
+
+
 streamlit==1.32.2
-wordcloud==1.9.2
+
 
 
 

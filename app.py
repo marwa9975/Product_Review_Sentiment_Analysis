@@ -1,16 +1,9 @@
 import streamlit as st
-
-import nltk
-import re
 import pickle
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
 
-
-stop_words = set(stopwords.words('english'))
-
-# Initialize the WordNetLemmatizer
-lemmatizer = WordNetLemmatizer()
+# Load NLTK objects and preprocess_text function
+with open('preprocessing.pkl', 'rb') as f:
+    stop_words, lemmatizer, preprocess_text = pickle.load(f)
 
 # Load the trained model
 with open('model.pkl', 'rb') as f:
@@ -19,18 +12,6 @@ with open('model.pkl', 'rb') as f:
 # Load the TF-IDF vectorizer
 with open('tfidf_vectorizer.pkl', 'rb') as f:
     loaded_tfidf_vectorizer = pickle.load(f)
-
-# Function to preprocess text
-def preprocess_text(text):
-     # Remove special characters, numbers, and links
-    text = re.sub(r'http\S+', '', text)
-    text = re.sub(r'[^a-zA-Z\s]', '', text)
-    text = text.lower()  # Convert to lowercase
-    tokens = nltk.word_tokenize(text)
-    tokens = [lemmatizer.lemmatize(word) for word in tokens]  # Lemmatize words
-    tokens = [word for word in tokens if word not in stop_words]  # Remove stopwords
-    return ' '.join(tokens)
-
 
 # Function to predict sentiment
 def predict_sentiment(text):
