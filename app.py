@@ -1,9 +1,8 @@
 import streamlit as st
-import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
-import joblib
 import nltk
 import re
+import pickle
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
@@ -14,10 +13,12 @@ stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
 # Load the trained model
-model = joblib.load('best_logistic_model.pkl')
+with open('model.pkl', 'rb') as f:
+    loaded_model = pickle.load(f)
 
 # Load the TF-IDF vectorizer
-tfidf_vectorizer = joblib.load('tfidf_vectorizer.pkl')
+with open('tfidf_vectorizer.pkl', 'rb') as f:
+    loaded_tfidf_vectorizer = pickle.load(f)
 
 # Function to preprocess text
 def preprocess_text(text):
@@ -36,9 +37,9 @@ def predict_sentiment(text):
     # Preprocess the text
     text = preprocess_text(text)
     # Vectorize the text using TF-IDF vectorizer
-    text_vectorized = tfidf_vectorizer.transform([text])
+    text_vectorized = loaded_tfidf_vectorizer.transform([text])
     # Predict sentiment using the trained model
-    prediction = model.predict(text_vectorized)
+    prediction = loaded_model.predict(text_vectorized)
     return prediction[0]
 
 # Streamlit app
