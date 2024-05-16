@@ -3,6 +3,7 @@ import nltk
 import re
 import pickle
 from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem import WordNetLemmatizer
 
 # Download NLTK stopwords

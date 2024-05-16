@@ -1,6 +1,6 @@
 nltk==3.8.1   
 streamlit==1.32.2
-
+scikit-learn==1.0.2
 
 
 
